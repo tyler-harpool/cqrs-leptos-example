@@ -21,7 +21,7 @@ leptos-spin = { version = "0.2.0", optional = true }
 serde = "1.0"
 spin-sdk = { version = "3.0.1", optional = true }
 wasm-bindgen = { version = "0.2", optional = true }
-
+thaw = { version = "0.3" }
 [workspace]
 
 [features]
@@ -31,6 +31,7 @@ hydrate = [
   "leptos_meta/hydrate",
   "leptos_router/hydrate",
   "dep:wasm-bindgen",
+  "thaw/hydrate",
 ]
 ssr = [
   "leptos/ssr",
@@ -40,6 +41,7 @@ ssr = [
   "dep:spin-sdk",
   "dep:leptos-spin",
   "dep:leptos_integration_utils",
+  "thaw/ssr",
 ]
 
 # Defines a size-optimized profile for the WASM bundle in release mode

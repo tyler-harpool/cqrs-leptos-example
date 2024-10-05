@@ -1,6 +1,6 @@
 use leptos::*;
 use leptos_router::*;
-
+use thaw::{Button, ButtonVariant};
 #[component]
 pub fn Home() -> impl IntoView {
     let counter_key = "main_counter";
@@ -16,7 +16,7 @@ pub fn Home() -> impl IntoView {
         <a href="/newpage">"Go New Page"</a>
         <ActionForm action=increment_count>
             <input type="hidden" name="key" value=counter_key />
-            <button>"Click Me: " {move || count.get()}</button>
+            <Button variant=ButtonVariant::Primary>"Click Me: " {move || count.get()}</Button>
         </ActionForm>
     }
 }
@@ -48,8 +48,8 @@ pub fn NewPage() -> impl IntoView {
     view! {
         <h1>"New Page Counter"</h1>
         <ActionForm action=increment_count>
-            <input type="hidden" name="key" value=counter_key />
-            <button>"Increment New Counter: " {move || count.get()}</button>
+             <input type="hidden" name="key" value=counter_key />
+             <Button variant=ButtonVariant::Primary>"Increment New Counter: " {move || count.get()}</Button>
         </ActionForm>
         <a href="/">"Go back"</a>
     }
