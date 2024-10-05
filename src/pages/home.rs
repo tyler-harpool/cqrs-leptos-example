@@ -1,6 +1,7 @@
 use leptos::*;
 use leptos_router::*;
-use thaw::{Button, ButtonVariant};
+use icondata::*;
+use thaw::{Button, ButtonVariant, Layout, LayoutHeader, LayoutSider, Menu, MenuItem};
 #[component]
 pub fn Home() -> impl IntoView {
     let counter_key = "main_counter";
@@ -10,14 +11,42 @@ pub fn Home() -> impl IntoView {
         move || increment_count.version().get(),
         move |_| get_count(counter_key.to_string()),
     );
-
+    let value = create_rw_signal(String::from("o"));
     view! {
-        <h1>"Welcome to Leptos"</h1>
-        <a href="/newpage">"Go New Page"</a>
-        <ActionForm action=increment_count>
-            <input type="hidden" name="key" value=counter_key />
-            <Button variant=ButtonVariant::Primary>"Click Me: " {move || count.get()}</Button>
-        </ActionForm>
+      <Layout has_sider=true>
+          <LayoutSider style="padding: 20px;">
+            <Menu value default_expanded_keys=vec![String::from("area")]>
+                <MenuItem key="a" label="And"/>
+                <MenuItem key="o" label="Or"/>
+                <MenuItem icon=icondata::AiAreaChartOutlined key="area" label="Area Chart">
+                    <a href="/newpage"><MenuItem key="target" label="Target"/></a>
+                    <MenuItem key="above" label="Above"/>
+                    <MenuItem key="below" label="Below"/>
+                </MenuItem>
+                <MenuItem icon=icondata::AiPieChartOutlined key="pie" label="Pie Chart">
+                    <MenuItem key="pie-target" label="Target"/>
+                    <MenuItem key="pie-above" label="Above"/>
+                    <MenuItem key="pie-below" label="Below"/>
+                </MenuItem>
+                <MenuItem icon=icondata::AiGithubOutlined key="github" label="Github"/>
+                <MenuItem icon=icondata::AiChromeOutlined key="chrome" label="Chrome"/>
+            </Menu>
+          </LayoutSider>
+          <Layout>
+              <LayoutHeader style="background-color: #0078ffaa; padding: 20px;">
+                 <h1>"Welcome to Leptos"</h1>
+              </LayoutHeader>
+              <Layout style="background-color: #0078ff88; padding: 20px;">
+                <ActionForm action=increment_count>
+                    <input type="hidden" name="key" value=counter_key />
+                    <Button variant=ButtonVariant::Primary>"Click Me: " {move || count.get()}</Button>
+                </ActionForm>
+              </Layout>
+          </Layout>
+      </Layout>
+
+
+
     }
 }
 
