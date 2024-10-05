@@ -1,78 +1,56 @@
-use leptos::{server_fn::error::NoCustomError, *};
+use leptos::*;
 use leptos_router::*;
 
-/// Renders the home page of your application.
 #[component]
 pub fn Home() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let increment_count = create_server_action::<UpdateCount>();
+    let counter_key = "main_counter";
+    let increment_count = create_server_action::<IncrementCount>();
 
     let count = create_resource(
-        move || {
-            (
-                increment_count.version().get(),
-                // clear.version().get(),
-            )
-        },
-        |_| get_count(),
+        move || increment_count.version().get(),
+        move |_| get_count(counter_key.to_string()),
     );
 
     view! {
-        <picture class="img">
-            <source srcset="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_pref_dark_RGB.svg" media="(prefers-color-scheme: dark)" />
-            <img src="https://raw.githubusercontent.com/leptos-rs/leptos/main/docs/logos/Leptos_logo_RGB.svg" alt="Leptos Logo" height="200" width="400" />
-        </picture>
-
         <h1>"Welcome to Leptos"</h1>
-          <a href="/newpage">"Go New Page"</a>
+        <a href="/newpage">"Go New Page"</a>
         <ActionForm action=increment_count>
-            <button >"Click Me: " {move || count.get()}</button>
+            <input type="hidden" name="key" value=counter_key />
+            <button>"Click Me: " {move || count.get()}</button>
         </ActionForm>
     }
 }
 
-#[server]
-pub async fn update_count() -> Result<(), ServerFnError> {
-    println!("Upated count");
-
-    let store = spin_sdk::key_value::Store::open_default()?;
-
-    let count: u64 = store
-        .get_json("l3xodus_count")
-        .map_err(|e| ServerFnError::new(e))?
-        .unwrap_or_default();
-
-    let updated_count = count + 1;
-
-    store
-        .set_json("l3xodus_count", &updated_count)
-        .map_err(|e| ServerFnError::new(e))?;
-    Ok(())
+#[server(IncrementCount, "/api")]
+pub async fn increment_count(key: String) -> Result<(), ServerFnError> {
+    use crate::application::commands::increment_counter::increment_counter;
+    increment_counter(key).await
 }
 
-#[server]
-pub async fn get_count() -> Result<u64, ServerFnError> {
-    let store = spin_sdk::key_value::Store::open_default()?;
-
-    let stored_count: u64 = store
-        .get_json("l3xodus_count")
-        .map_err(|e| ServerFnError::new(e))?
-        .ok_or_else(|| {
-            ServerFnError::<NoCustomError>::ServerError("Failed to get count".to_string())
-        })?;
-
-    println!("Got stored {stored_count}");
-
-    Ok(stored_count)
+#[server(GetCount, "/api")]
+pub async fn get_count(key: String) -> Result<u64, ServerFnError> {
+    use crate::application::queries::get_count::get_count as get_count_query;
+    get_count_query(key).await
 }
+
 
 
 #[component]
 pub fn NewPage() -> impl IntoView {
-    view! {
-        <h1>"Welcome to Leptos"</h1>
+    let counter_key = "new_page_counter";
+    let increment_count = create_server_action::<IncrementCount>();
 
-        <p>"This is a new page"</p>
+    let count = create_resource(
+        move || increment_count.version().get(),
+        move |_| get_count(counter_key.to_string()),
+    );
+
+    view! {
+        <h1>"New Page Counter"</h1>
+        <ActionForm action=increment_count>
+            <input type="hidden" name="key" value=counter_key />
+            <button>"Increment New Counter: " {move || count.get()}</button>
+        </ActionForm>
         <a href="/">"Go back"</a>
     }
 }

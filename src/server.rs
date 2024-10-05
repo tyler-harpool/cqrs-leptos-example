@@ -8,10 +8,10 @@ async fn handle_l3xodus(req: IncomingRequest, resp_out: ResponseOutparam) {
     conf.leptos_options.output_name = "l3xodus".to_owned();
 
     // Register server functions
+    register_explicit::<crate::pages::home::IncrementCount>();
     register_explicit::<crate::pages::home::GetCount>();
-    register_explicit::<crate::pages::home::UpdateCount>();
-
-    let app_router = crate::routes::AppRouter;
+    register_explicit::<crate::application::queries::get_count::GetCount>();
+    register_explicit::<crate::application::commands::increment_counter::IncrementCounter>();    let app_router = crate::routes::AppRouter;
 
     let mut routes = RouteTable::build(app_router);
     routes.add_server_fn_prefix("/api").unwrap();
