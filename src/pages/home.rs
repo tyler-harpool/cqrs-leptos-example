@@ -34,7 +34,7 @@ pub fn Home() -> impl IntoView {
           </LayoutSider>
           <Layout>
               <LayoutHeader style="background-color: #0078ffaa; padding: 20px;">
-                 <h1>"Welcome to Leptos"</h1>
+                 <h1>"Welcome to Lexodus"</h1>
               </LayoutHeader>
               <Layout style="background-color: #0078ff88; padding: 20px;">
                 <ActionForm action=increment_count>
