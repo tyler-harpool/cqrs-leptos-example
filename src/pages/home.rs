@@ -19,10 +19,9 @@ pub fn Home() -> impl IntoView {
           <Menu value default_expanded_keys=vec![String::from("dashboard")]>
               <MenuItem key="dashboard" icon=icondata::AiDashboardOutlined label="Dashboard"/>
               <MenuItem icon=icondata::AiFileOutlined key="cases" label="Cases">
-                  <a href="/newpage"><MenuItem key="new-case" label="New Case"/></a>
-                  <MenuItem key="search-cases" label="Search Cases"/>
+                  <a href="/cases/new"><MenuItem key="new-case" label="New Case"/></a>                <MenuItem key="search-cases" label="Search Cases"/>
                   <MenuItem key="my-cases" label="My Cases"/>
-                  <MenuItem key="all-cases" label="All Cases"/>
+                  <a href="/cases"><MenuItem key="list-cases" label="All Cases"/></a>
               </MenuItem>
               <MenuItem icon=icondata::AiCalendarOutlined key="calendar" label="Calendar">
                   <MenuItem key="my-schedule" label="My Schedule"/>

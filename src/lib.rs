@@ -1,7 +1,7 @@
 mod pages;
 mod routes;
 mod application;
-
+mod repositories;
 #[cfg(feature = "ssr")]
 mod server;
 
