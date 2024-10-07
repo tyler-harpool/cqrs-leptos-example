@@ -12,7 +12,8 @@ async fn handle_l3xodus(req: IncomingRequest, resp_out: ResponseOutparam) {
     register_explicit::<crate::pages::home::GetCount>();
     register_explicit::<crate::application::queries::get_count::GetCount>();
     register_explicit::<crate::application::commands::increment_counter::IncrementCounter>();    let app_router = crate::routes::AppRouter;
-
+    register_explicit::<crate::pages::case_management::new_case::NewCase>();
+    register_explicit::<crate::pages::case_management::search::SearchCasesAction>();
     let mut routes = RouteTable::build(app_router);
     routes.add_server_fn_prefix("/api").unwrap();
 

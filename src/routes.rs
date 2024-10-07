@@ -12,6 +12,7 @@ use crate::pages::case_management::{
     list_case::ListCases,
     view_case::ViewCase,
     edit_case::EditCase,
+    search::SearchCases,
 };
 
 #[component]
@@ -32,11 +33,12 @@ pub fn AppRouter() -> impl IntoView {
             <Routes>
                 <Route path="" view=Home/>
                 <Route path="/newpage" view=NewPage/>
-                <Route path="cases" view=CaseManagementLayout>
+                <Route path="case-management" view=CaseManagementLayout>
                     <Route path="" view=ListCases/>
                     <Route path="new" view=NewCase/>
                     <Route path=":id" view=ViewCase/>
                     <Route path=":id/edit" view=EditCase/>
+                    <Route path="search" view=SearchCases/>
                 </Route>
                 <Route path="/*any" view=NotFound/>
             </Routes>
