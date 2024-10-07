@@ -1,7 +1,7 @@
 // use crate::components::{Footer, Nav};
 
 use leptos::*;
-use thaw::{Button, ButtonVariant, Layout, LayoutHeader, LayoutSider, Menu, MenuItem};
+use thaw::{Layout, LayoutSider, Menu, MenuItem};
 
 // use crate::components::{Footer, Nav, Action_Menu};
 
