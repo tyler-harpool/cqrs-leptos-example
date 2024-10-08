@@ -1,6 +1,6 @@
 use leptos::*;
 use leptos_router::*;
-use thaw::{Button, ButtonVariant, Layout, LayoutHeader, LayoutSider, Menu, MenuItem};
+use thaw::{Button, ButtonVariant, Layout, LayoutHeader};
 
 use crate::pages::components::Default_Layout;
 #[component]
