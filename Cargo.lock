@@ -955,6 +955,7 @@ dependencies = [
  "leptos_integration_utils",
  "leptos_meta",
  "leptos_router",
+ "log",
  "serde",
  "spin-sdk",
  "thaw",

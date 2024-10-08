@@ -24,6 +24,7 @@ wasm-bindgen = { version = "0.2", optional = true }
 thaw = { version = "0.3" }
 icondata = "0.4.0"
 chrono = { version = "0.4", features = ["serde"] }
+log = "0.4.22"
 [workspace]
 
 [features]

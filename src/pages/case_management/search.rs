@@ -285,21 +285,7 @@ pub async fn search_cases_action(
     type_field: Option<String>,
     exact_matches_only: Option<bool>,
 ) -> Result<Vec<CaseSearchCriteria>, ServerFnError> {
-    let criteria = CaseSearchCriteria {
-        case_number,
-        case_status,
-        filed_date_from,
-        filed_date_to,
-        last_entry_date_from,
-        last_entry_date_to,
-        cause_of_action,
-        nature_suit,
-        last_business_name,
-        first_name,
-        middle_name,
-        type_field,
-        exact_matches_only,
-    };
+
 
     let mock_cases = vec![
         CaseSearchCriteria {

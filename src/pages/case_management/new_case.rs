@@ -17,8 +17,8 @@ pub async fn create_case_action(
 #[component]
 pub fn NewCase() -> impl IntoView {
     let create_case_action = create_server_action::<NewCase>();
-    let value = create_case_action.value();
-    let has_error = move || value.with(|val| matches!(val, Some(Err(_))));
+    let response = create_case_action.value();
+    let has_error = move || response.with(|val| matches!(val, Some(Err(_))));
 
     let navigate = use_navigate();
 
@@ -89,7 +89,7 @@ pub fn NewCase() -> impl IntoView {
             {move || has_error().then(|| view! {
                 <p class="error">"An error occurred while creating the case."</p>
             })}
-            {move || value.with(|val| match val {
+            {move || response.with(|val| match val {
                 Some(Ok(case)) => {
                     navigate(&format!("/case-management/{}", case.case_number), Default::default());
                     view! {}.into_view()
