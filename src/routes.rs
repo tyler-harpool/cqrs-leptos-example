@@ -14,6 +14,9 @@ pub fn AppRouter() -> impl IntoView {
     view! {
         // injects a stylesheet into the document <head>
         <Stylesheet id="leptos" href="/pkg/l3xodus.css"/>
+        <Link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+        <Link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
 
         // sets the document title
         <Title text="Welcome to Leptos"/>

@@ -1,6 +1,6 @@
 use leptos::*;
 use leptos_router::*;
-
+use crate::pages::components::default_layout::DefaultLayout;
 #[component]
 pub fn Home() -> impl IntoView {
     let counter_key = "main_counter";
@@ -12,12 +12,14 @@ pub fn Home() -> impl IntoView {
     );
 
     view! {
-        <h1>"Welcome to Leptos"</h1>
+      <DefaultLayout>
+
         <a href="/newpage">"Go New Page"</a>
         <ActionForm action=increment_count>
             <input type="hidden" name="key" value=counter_key />
             <button>"Click Me: " {move || count.get()}</button>
         </ActionForm>
+        </DefaultLayout>
     }
 }
 
@@ -46,11 +48,12 @@ pub fn NewPage() -> impl IntoView {
     );
 
     view! {
-        <h1>"New Page Counter"</h1>
+      <DefaultLayout>
         <ActionForm action=increment_count>
             <input type="hidden" name="key" value=counter_key />
             <button>"Increment New Counter: " {move || count.get()}</button>
         </ActionForm>
         <a href="/">"Go back"</a>
+        </DefaultLayout>
     }
 }
